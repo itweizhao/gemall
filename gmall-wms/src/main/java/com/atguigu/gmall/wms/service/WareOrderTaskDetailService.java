@@ -11,7 +11,7 @@ import com.atguigu.core.bean.QueryCondition;
  *
  * @author weizhao
  * @email 1792926301@qq.com
- * @date 2019-12-31 16:26:38
+ * @date 2020-01-02 12:52:25
  */
 public interface WareOrderTaskDetailService extends IService<WareOrderTaskDetailEntity> {
 

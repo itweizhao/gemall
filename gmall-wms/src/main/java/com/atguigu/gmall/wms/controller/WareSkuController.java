@@ -24,7 +24,7 @@ import com.atguigu.gmall.wms.service.WareSkuService;
  *
  * @author weizhao
  * @email 1792926301@qq.com
- * @date 2019-12-31 16:26:38
+ * @date 2020-01-02 12:52:25
  */
 @Api(tags = "商品库存 管理")
 @RestController

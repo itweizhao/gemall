@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import com.atguigu.gmall.wms.entity.ShAreaEntity;
 import com.atguigu.gmall.wms.service.ShAreaService;
 
+
+
+
 /**
  * 全国省市区信息
  *
  * @author weizhao
  * @email 1792926301@qq.com
- * @date 2019-12-31 16:26:38
+ * @date 2020-01-02 12:52:25
  */
 @Api(tags = "全国省市区信息 管理")
 @RestController
