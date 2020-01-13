@@ -39,12 +39,13 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
 
         //判断type是否为空
-        if (type !=null)
-            wrapper.eq("attr_type",type);
+        if (type !=null) {
+            wrapper.eq("attr_type", type);
+        }
         wrapper.eq("catelog_id",cid);
         IPage<AttrEntity> page = this.page(
                 new Query<AttrEntity>().getPage(queryCondition),
-                new QueryWrapper<AttrEntity>()
+                wrapper
         );
 
         return new PageVo(page);

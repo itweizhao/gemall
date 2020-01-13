@@ -1,6 +1,11 @@
 package com.atguigu.gmall.pms.service.impl;
 
+import com.atguigu.gmall.pms.dao.SpuCommentDao;
+import com.atguigu.gmall.pms.entity.SpuCommentEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -17,6 +22,9 @@ import com.atguigu.gmall.pms.service.SkuInfoService;
 @Service("skuInfoService")
 public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> implements SkuInfoService {
 
+    @Autowired
+    private SpuCommentDao spuCommentDao;
+
     @Override
     public PageVo queryPage(QueryCondition params) {
         IPage<SkuInfoEntity> page = this.page(
@@ -26,5 +34,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
         return new PageVo(page);
     }
+
+
 
 }

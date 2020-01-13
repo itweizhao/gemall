@@ -38,6 +38,7 @@ public class AttrController {
     public Resp<PageVo> queryAttrByCidOrTypePage(QueryCondition queryCondition,
                                                  @RequestParam("cid")long cid,
                                                  @RequestParam(value = "type",required = false)Integer type){
+
         PageVo pageVo = this.attrService.queryAttrByCidOrTypePage(queryCondition,cid,type);
 
         return Resp.ok(pageVo);
