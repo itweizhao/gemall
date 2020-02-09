@@ -7,14 +7,14 @@ spring:
         server-addr: 127.0.0.1:8848
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.140.132:3306/guli_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.5.132:3306/guli_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
   redis:
-    host: 192.168.140.132
+    host: 192.168.5.132
 mybatis-plus:
-  mapper-locations: classpath:mapper/sms/*.xml  # ¶ÁÈ¡Ó³ÉäÎÄ¼þ
+  mapper-locations: classpath:mapper/sms/*.xml  # ï¿½ï¿½È¡Ó³ï¿½ï¿½ï¿½Ä¼ï¿½
   global-config:
     db-config:
-      id-type: auto  # Ä¬ÈÏÊ¹ÓÃÊý¾Ý¿â×ÔÔö
+      id-type: auto  # Ä¬ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
 

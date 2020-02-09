@@ -12,6 +12,7 @@ import com.atguigu.gmall.pms.vo.SpuInfoVO;
 import com.atguigu.gmall.sms.vo.SaleVO;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
     @Autowired
     private SkuSaleAttrValueService saleAttrValueService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -108,6 +112,8 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
                 attrValueEntity.setSpuId(spuId);
                 attrValueEntity.setAttrSort(0);
                 attrValueEntity.setQuickShow(0);
+                attrValueEntity.setAttrName(baseAttrValueVO.getAttrName());
+                attrValueEntity.setAttrValue(baseAttrValueVO.getAttrValue());
                 return attrValueEntity;
             }).collect(Collectors.toList());
             attrValueService.saveBatch(attrValues);
@@ -126,6 +132,12 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
                 skuInfoEntity.setSkuCode(UUID.randomUUID().toString());
                 skuInfoEntity.setCatalogId(spuInfoVO.getCatalogId());
                 skuInfoEntity.setBrandId(spuInfoVO.getBrandId());
+                skuInfoEntity.setPrice(sku.getPrice());
+                skuInfoEntity.setSkuDesc(sku.getSkuDesc());
+                skuInfoEntity.setSkuTitle(sku.getSkuTitle());
+                skuInfoEntity.setSkuName(sku.getSkuName());
+                skuInfoEntity.setSkuSubtitle(sku.getSkuSubtitle());
+                skuInfoEntity.setWeight(sku.getWeight());
                 skuInfoDao.insert(skuInfoEntity);
                 Long skuId = skuInfoEntity.getSkuId();
                 //skuInfoImages
@@ -158,7 +170,11 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             });
 
         }
+        sendMsg(spuId,"insert");
+    }
 
+    private void sendMsg(Long spuId, String type){
+        amqpTemplate.convertAndSend("GMALL-PMS-EXCHANGE","item."+type,spuId);
     }
 
 }

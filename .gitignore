@@ -1,6 +1,7 @@
 .idea/
 *.iml
-
+.iml
+.md
 mvnw*
 .mvn
 
